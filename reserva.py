@@ -76,10 +76,11 @@ class Reserva:
     def duracion(self, valor):
         try:
             duracion = float(valor)
-        except (TypeError, ValueError) as error:
+        except (TypeError, ValueError) as error_original:
+            # Encadenamiento explícito con 'from error_original'
             raise DatoInvalidoError(
-                "La duración de la reserva debe ser numérica."
-            ) from error
+                "La duración de la reserva debe ser un valor numérico válido."
+            ) from error_original
 
         if duracion <= 0:
             raise DatoInvalidoError(
@@ -96,10 +97,11 @@ class Reserva:
     def cantidad(self, valor):
         try:
             cantidad = int(valor)
-        except (TypeError, ValueError) as error:
+        except (TypeError, ValueError) as error_original:
+            # Encadenamiento explícito con 'from error_original'
             raise DatoInvalidoError(
-                "La cantidad debe ser un número entero."
-            ) from error
+                "La cantidad solicitada debe ser un número entero válido."
+            ) from error_original
 
         if cantidad <= 0:
             raise DatoInvalidoError(
